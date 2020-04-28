@@ -2,7 +2,7 @@
 # This is a Python 2 image that uses the nginx, gunicorn, flask stack
 # for serving inferences in a stable way.
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER Amazon AI <sage-learner@amazon.com>
 
@@ -22,7 +22,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
 # a significant amount of space. These optimizations save a fair amount of space in the
 # image, which reduces start up time.
 RUN pip3 install --upgrade pip
-RUN pip3 install numpy==1.14.3 scipy scikit-learn==0.19.1 xgboost==0.72.1 pandas==0.22.0 flask gevent gunicorn && \
+RUN pip3 install numpy==1.16.3 torch==1.0.1 spacy==2.1.3 transformers==2.2.2 Cython==0.29.10 tqdm==4.32.2 neuralcoref==4.0 argparse scipy scikit-learn bert-extractive-summarizer==0.4.2 Flask flask-cors nltk xgboost==0.72.1 pandas==0.22.0 flask gevent gunicorn https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz && \
         (cd /usr/local/lib/python3.5/dist-packages/scipy/.libs; rm *; ln ../../numpy/.libs/* .) && \
         rm -rf /root/.cache
 
